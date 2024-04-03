@@ -10,14 +10,14 @@ public class Employee {
     private Double yearlySalary;
     private PensionPlan pensionplan;
 
-    public Employee(Long employeeId, String planRef, String fName, String lName, LocalDate employementDate,
-            Double yearlySalary, LocalDate enrollmentDate, Double monthlyContribution) {
+    public Employee(Long employeeId, String fName, String lName, LocalDate employementDate,
+            Double yearlySalary, String planRef, LocalDate enrollmentDate, Double monthlyContribution) {
         this.employeeId = employeeId;
         this.fName = fName;
         this.lName = lName;
         this.employementDate = employementDate;
         this.yearlySalary = yearlySalary;
-        this.pensionplan = new PensionPlan(planRef, enrollmentDate, monthlyContribution);
+        this.pensionplan = (planRef == null) ? null : new PensionPlan(planRef, enrollmentDate, monthlyContribution);
     }
 
     public Long getEmployeeId() {
@@ -64,17 +64,19 @@ public class Employee {
         return pensionplan;
     }
 
-    @Override
-    public String toString() {
-        return "Employee [employeeId=" + employeeId + ", fName=" + fName + ", lName=" + lName + ", employementDate="
-                + employementDate + ", yearlySalary=" + yearlySalary + "]";
-    }
-
     public String toJSONString() {
+        String planReference = pensionplan != null ? pensionplan.getPlanRefernceNumber() : "null";
+        String enrollmentDate = pensionplan != null && pensionplan.getEnrollmentDate() != null
+                ? pensionplan.getEnrollmentDate().toString()
+                : "null";
+        String monthlyContribution = pensionplan != null ? String.format("%,.2f", pensionplan.getMonthlyContribution())
+                : "null";
+                
         return String.format(
-                "\t{ \"employeeId\":%d,\"planReference\":%d, \"fName\":\"%s\", \"fName\":\"%s\", \"employementDate\":%d, \"unitPrice\":%,.2f, \"yearlySalary\":%,.2f,\"enrollmentDate\":%d,\"monthlyContribution\":%d, }",
-                employeeId, fName, lName, employementDate, yearlySalary, pensionplan.getEnrollmentDate(),
-                pensionplan.getMonthlyContribution());
+                "\t{ \"employeeId\": %d, \"fName\": \"%s\", \"lName\": \"%s\", \"employmentDate\": \"%s\", \"yearlySalary\": %,.2f, \"planReference\": %s, \"enrollmentDate\": %s, \"monthlyContribution\": %s }",
+                employeeId, fName, lName, employementDate != null ? employementDate.toString() : "null", yearlySalary,
+                planReference, enrollmentDate,
+                monthlyContribution);
     }
 
 }
