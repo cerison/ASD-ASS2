@@ -6,7 +6,6 @@ import java.util.List;
 
 public class PensionPlanMgt {
     public static void main(String[] args) {
-        System.out.println("Hello ApacheMaven World!");
         var employees = List.of(
                 new Employee(1L, "Daniel", "Agar", LocalDate.of(2018, 1, 17), 105945.50, "EX1089",
                         LocalDate.of(2023, 1, 17), 100.00),
