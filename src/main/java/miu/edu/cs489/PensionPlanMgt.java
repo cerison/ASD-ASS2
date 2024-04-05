@@ -48,8 +48,7 @@ public class PensionPlanMgt {
             System.out.println("[");
             int numEmployees = employees.size();
             for (int i = 0; i < numEmployees; i++) {
-                String employee = employees.get(i).toJSONString();
-                System.out.print(employee);
+                System.out.print(employees.get(i).toJSONString());
                 if (i != (numEmployees - 1)) {
                     System.out.println(",");
                 }
