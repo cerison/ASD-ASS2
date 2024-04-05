@@ -73,7 +73,7 @@ public class Employee {
                 : "null";
                 
         return String.format(
-                "\t{ \"employeeId\": %d, \"fName\": \"%s\", \"lName\": \"%s\", \"employmentDate\": \"%s\", \"yearlySalary\": %,.2f, \"planReference\": %s, \"enrollmentDate\": %s, \"monthlyContribution\": %s }",
+                "\t{ \"employeeId\": %d, \"fName\": %s, \"lName\": %s, \"employmentDate\": %s, \"yearlySalary\": %,.2f, \"planReference\": %s, \"enrollmentDate\": %s, \"monthlyContribution\": %s }",
                 employeeId, fName, lName, employementDate != null ? employementDate.toString() : "null", yearlySalary,
                 planReference, enrollmentDate,
                 monthlyContribution);
